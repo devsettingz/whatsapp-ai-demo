@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './botari-logo.png'; // Make sure this file exists in frontend/src/
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -34,7 +33,8 @@ function App() {
     <div style={{ margin: '20px', fontFamily: 'Arial' }}>
       {/* Logo and header */}
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-        <img src={logo} alt="Botari Logo" style={{ width: '80px', marginBottom: '10px' }} />
+        {/* Logo served directly from public folder */}
+        <img src="/botari-logo.png" alt="Botari Logo" style={{ width: '80px', marginBottom: '10px' }} />
         <h2 style={{ color: '#333' }}>Botari AI Demo</h2>
         <p style={{ color: '#666', fontSize: '14px' }}>Smart, seamless customer support</p>
       </div>
