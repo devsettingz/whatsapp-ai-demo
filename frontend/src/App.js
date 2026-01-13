@@ -11,7 +11,7 @@ function App() {
     setMessages(newMessages);
 
     try {
-      const res = await fetch('http://localhost:3000/chat', {
+      const res = await fetch('https://whatsapp-ai-demo.onrender.com/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: input })
