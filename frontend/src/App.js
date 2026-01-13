@@ -31,18 +31,14 @@ function App() {
 
   return (
     <div style={{ margin: '20px', fontFamily: 'Arial' }}>
-      {/* Logo and header */}
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
         <img
-          src="/botari-logo-fixed.png"
+          src="/botari-logo.png"
           alt="Botari Logo"
           style={{
-            width: '90px',
+            width: '100px',
             height: 'auto',
-            marginBottom: '12px',
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            marginBottom: '10px',
             borderRadius: '8px',
           }}
         />
@@ -52,7 +48,6 @@ function App() {
         </p>
       </div>
 
-      {/* Chat window */}
       <div style={{
         border: '1px solid #ccc',
         height: '400px',
@@ -85,7 +80,6 @@ function App() {
         )}
       </div>
 
-      {/* Input + button */}
       <div style={{ display: 'flex', gap: '10px' }}>
         <input
           value={input}

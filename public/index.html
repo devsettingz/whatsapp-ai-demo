@@ -27,34 +27,62 @@
       font-size: 14px;
       color: #666;
     }
-
-    /* Mobile-friendly scaling */
-    @media (max-width: 480px) {
-      #splash img {
-        width: 70px;
-      }
-      #splash h1 {
-        font-size: 20px;
-      }
-      #splash p {
-        font-size: 12px;
-      }
+    #chat {
+      border: 1px solid #ccc;
+      height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #fff;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
     }
-
+    .bubble {
+      padding: 8px 12px;
+      border-radius: 20px;
+      margin: 6px 0;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+    .user {
+      background-color: #dcedc8;
+      align-self: flex-end;
+    }
+    .ai {
+      background-color: #e0f7fa;
+      align-self: flex-start;
+    }
+    #input {
+      width: 80%;
+      padding: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #00796b;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #typing {
+      font-style: italic;
+      color: #888;
+    }
     #root {
       display: none;
     }
   </style>
 </head>
 <body>
-  <!-- Splash screen -->
   <div id="splash">
-    <img src="/botari-logo-fixed.png" alt="Botari Logo" />
+    <img src="/botari-logo.png" alt="Botari Logo" />
     <h1>Botari AI Demo</h1>
     <p>Smart, seamless customer support</p>
   </div>
 
-  <!-- Main app -->
   <div id="root">
     <h2>AI Chat Demo</h2>
     <div id="chat"></div>
