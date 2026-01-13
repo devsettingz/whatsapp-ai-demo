@@ -1,37 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Chat Demo</title>
+  <title>Botari AI Demo</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    #chat { border: 1px solid #ccc; height: 400px; overflow-y: auto; padding: 10px; margin-bottom: 10px; }
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f7fa; }
+    #splash {
+      text-align: center;
+      padding: 80px;
+      font-family: Arial;
+    }
+    #splash img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+    #chat {
+      border: 1px solid #ccc;
+      height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #fff;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+    .bubble {
+      padding: 8px 12px;
+      border-radius: 20px;
+      margin: 6px 0;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+    .user {
+      background-color: #dcedc8;
+      align-self: flex-end;
+    }
+    .ai {
+      background-color: #e0f7fa;
+      align-self: flex-start;
+    }
     #input { width: 80%; padding: 5px; }
     button { padding: 5px 10px; }
+    #typing { font-style: italic; color: #888; }
+    #root { display: none; }
   </style>
 </head>
 <body>
-  <h2>AI Chat Demo</h2>
-  <div id="chat"></div>
-  <input id="input" placeholder="Type a message..." />
-  <button onclick="sendMessage()">Send</button>
+  <!-- Splash screen -->
+  <div id="splash">
+    <img src="logo192.png" alt="Botari Logo" />
+    <h1>Welcome to Botari AI</h1>
+    <p>Smart, seamless customer support — powered by AI</p>
+  </div>
+
+  <!-- Main app -->
+  <div id="root">
+    <h2>AI Chat Demo</h2>
+    <div id="chat"></div>
+    <p id="typing" style="display:none;">AI is typing...</p>
+    <input id="input" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
 
   <script>
+    // Hide splash after 2 seconds
+    setTimeout(() => {
+      document.getElementById('splash').style.display = 'none';
+      document.getElementById('root').style.display = 'block';
+    }, 2000);
+
     async function sendMessage() {
       const input = document.getElementById('input');
       const chat = document.getElementById('chat');
+      const typing = document.getElementById('typing');
       const userMsg = input.value.trim();
       if (!userMsg) return;
 
-      chat.innerHTML += `<p><b>You:</b> ${userMsg}</p>`;
+      // Add user bubble
+      const userBubble = document.createElement('div');
+      userBubble.className = 'bubble user';
+      userBubble.innerHTML = `<b>You:</b> ${userMsg}`;
+      chat.appendChild(userBubble);
       input.value = '';
 
-      const res = await fetch('/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMsg })
-      });
-      const data = await res.json();
-      chat.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+      // Show typing indicator
+      typing.style.display = 'block';
+
+      try {
+        const res = await fetch('https://whatsapp-ai-demo.onrender.com/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userMsg })
+        });
+        const data = await res.json();
+
+        // Hide typing indicator
+        typing.style.display = 'none';
+
+        // Add AI bubble
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'bubble ai';
+        aiBubble.innerHTML = `<b>AI:</b> ${data.reply}`;
+        chat.appendChild(aiBubble);
+      } catch (err) {
+        typing.style.display = 'none';
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'bubble ai';
+        aiBubble.innerHTML = `<b>AI:</b> Error: could not reach backend.`;
+        chat.appendChild(aiBubble);
+      }
+
       chat.scrollTop = chat.scrollHeight;
     }
   </script>
