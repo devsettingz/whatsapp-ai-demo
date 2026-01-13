@@ -34,7 +34,7 @@ function App() {
       {/* Logo and header */}
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
         <img
-          src="/botari-logo.png"
+          src="/botari-logo-fixed.png"
           alt="Botari Logo"
           style={{
             width: '90px',
