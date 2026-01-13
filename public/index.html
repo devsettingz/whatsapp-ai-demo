@@ -1,148 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Botari AI Demo</title>
+  <title>Botari Logo Test</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
       background-color: #f5f7fa;
-    }
-    #splash {
       text-align: center;
-      padding: 60px 20px;
     }
-    #splash img {
+    img {
       width: 100px;
       height: auto;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       border-radius: 8px;
     }
-    #splash h1 {
-      margin: 10px 0 5px;
-      font-size: 24px;
+    h1 {
       color: #333;
+      margin: 5px 0;
     }
-    #splash p {
-      font-size: 14px;
+    p {
       color: #666;
+      font-size: 14px;
+      margin: 0;
     }
-    #chat {
-      border: 1px solid #ccc;
-      height: 400px;
-      overflow-y: auto;
-      padding: 10px;
-      margin-bottom: 10px;
-      background-color: #fff;
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-    }
-    .bubble {
-      padding: 8px 12px;
-      border-radius: 20px;
-      margin: 6px 0;
-      max-width: 80%;
-      word-wrap: break-word;
-    }
-    .user {
-      background-color: #dcedc8;
-      align-self: flex-end;
-    }
-    .ai {
-      background-color: #e0f7fa;
-      align-self: flex-start;
-    }
-    #input {
-      width: 80%;
-      padding: 5px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    button {
-      padding: 5px 10px;
-      background-color: #00796b;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    #typing {
-      font-style: italic;
-      color: #888;
-    }
-    #root {
-      display: none;
+    /* Mobile-friendly scaling */
+    @media (max-width: 480px) {
+      img {
+        width: 70px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      p {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Splash screen -->
-  <div id="splash">
-    <img src="/botari-logo.png" alt="Botari Logo" />
-    <h1>Botari AI Demo</h1>
-    <p>Smart, seamless customer support</p>
-  </div>
-
-  <!-- Main app -->
-  <div id="root">
-    <h2>AI Chat Demo</h2>
-    <div id="chat"></div>
-    <p id="typing" style="display:none;">AI is typing...</p>
-    <input id="input" placeholder="Type a message..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>
-
-  <script>
-    // Hide splash after 2 seconds
-    setTimeout(() => {
-      document.getElementById('splash').style.display = 'none';
-      document.getElementById('root').style.display = 'block';
-    }, 2000);
-
-    async function sendMessage() {
-      const input = document.getElementById('input');
-      const chat = document.getElementById('chat');
-      const typing = document.getElementById('typing');
-      const userMsg = input.value.trim();
-      if (!userMsg) return;
-
-      // Add user bubble
-      const userBubble = document.createElement('div');
-      userBubble.className = 'bubble user';
-      userBubble.innerHTML = `<b>You:</b> ${userMsg}`;
-      chat.appendChild(userBubble);
-      input.value = '';
-
-      // Show typing indicator
-      typing.style.display = 'block';
-
-      try {
-        const res = await fetch('https://whatsapp-ai-demo.onrender.com/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userMsg })
-        });
-        const data = await res.json();
-
-        // Hide typing indicator
-        typing.style.display = 'none';
-
-        // Add AI bubble
-        const aiBubble = document.createElement('div');
-        aiBubble.className = 'bubble ai';
-        aiBubble.innerHTML = `<b>AI:</b> ${data.reply}`;
-        chat.appendChild(aiBubble);
-      } catch (err) {
-        typing.style.display = 'none';
-        const aiBubble = document.createElement('div');
-        aiBubble.className = 'bubble ai';
-        aiBubble.innerHTML = `<b>AI:</b> Error: could not reach backend.`;
-        chat.appendChild(aiBubble);
-      }
-
-      chat.scrollTop = chat.scrollHeight;
-    }
-  </script>
+  <img src="/botari-logo.png" alt="Botari Logo" />
+  <h1>Botari AI Demo</h1>
+  <p>Smart, seamless customer support</p>
 </body>
 </html>
