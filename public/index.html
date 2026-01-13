@@ -27,20 +27,6 @@
       font-size: 14px;
       color: #666;
     }
-
-    /* Mobile-friendly logo scaling */
-    @media (max-width: 480px) {
-      #splash img {
-        width: 70px;
-      }
-      #splash h1 {
-        font-size: 20px;
-      }
-      #splash p {
-        font-size: 12px;
-      }
-    }
-
     #chat {
       border: 1px solid #ccc;
       height: 400px;
@@ -108,6 +94,7 @@
   </div>
 
   <script>
+    // Hide splash after 2 seconds
     setTimeout(() => {
       document.getElementById('splash').style.display = 'none';
       document.getElementById('root').style.display = 'block';
@@ -120,12 +107,14 @@
       const userMsg = input.value.trim();
       if (!userMsg) return;
 
+      // Add user bubble
       const userBubble = document.createElement('div');
       userBubble.className = 'bubble user';
       userBubble.innerHTML = `<b>You:</b> ${userMsg}`;
       chat.appendChild(userBubble);
       input.value = '';
 
+      // Show typing indicator
       typing.style.display = 'block';
 
       try {
@@ -136,8 +125,10 @@
         });
         const data = await res.json();
 
+        // Hide typing indicator
         typing.style.display = 'none';
 
+        // Add AI bubble
         const aiBubble = document.createElement('div');
         aiBubble.className = 'bubble ai';
         aiBubble.innerHTML = `<b>AI:</b> ${data.reply}`;
